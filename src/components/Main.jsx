@@ -2,6 +2,7 @@
 import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
+import theme from '../theme';
 //import Text from './Text';
 
 const styles = StyleSheet.create({
@@ -9,14 +10,15 @@ const styles = StyleSheet.create({
     //marginTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: theme.colors.background
   },
 });
 
 const Main = () => {
   return (
     <View style={styles.container}>
-      <AppBar/>
-      <RepositoryList/>
+      <AppBar />
+      <RepositoryList />
     </View>
   );
 };

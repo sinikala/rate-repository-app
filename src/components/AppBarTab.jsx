@@ -2,9 +2,6 @@ import { Pressable } from 'react-native';
 import Text from './Text';
 
 
-
-
-
 const handlePress = () => (
   console.log('press')
 );
