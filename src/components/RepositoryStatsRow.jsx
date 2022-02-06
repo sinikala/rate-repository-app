@@ -4,14 +4,15 @@ import Text from './Text';
 
 const styles = StyleSheet.create({
   statRow: {
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-around'
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   statBox: {
-    // display: 'flex',
-    // justifyContent: 'space-evenly',
-    // alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: "center",
+    margin: 5
   }
 });
 
