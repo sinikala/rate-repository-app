@@ -6,6 +6,8 @@ const theme = {
     barBackground: 'teal',
     barText: '#dcdcdc',
     background: '#e1e4e8',
+    elementBackground: 'white',
+    buttonText: 'white'
   },
   fontSizes: {
     body: 14,

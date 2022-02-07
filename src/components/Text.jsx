@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
   barText: {
     color: theme.colors.barText,
   },
+  buttonText: {
+    color: theme.colors.buttonText,
+    padding: 8
+  },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
   },
@@ -32,6 +36,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === 'textSecondary' && styles.colorTextSecondary,
     color === 'primary' && styles.colorPrimary,
     color === 'barText' && styles.barText,
+    color === 'buttonText' && styles.buttonText,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
     style,

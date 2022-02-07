@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch'
   },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.elementBackground,
     margin: 5
   },
   infoContainer: {
