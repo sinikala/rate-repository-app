@@ -58,8 +58,9 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, { resetForm }) => {
     console.log(values);
+    resetForm()
   };
 
   return (
