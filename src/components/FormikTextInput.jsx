@@ -7,7 +7,8 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   errorText: {
-    marginTop: 5,
+    marginLeft: 8,
+    color: theme.colors.error,
   },
   field: {
     borderRadius: 3,
@@ -23,12 +24,13 @@ const FormikTextInput = ({ name, ...props }) => {
   const showError = meta.touched && meta.error;
 
   return (
-    <View style={styles.field}>
+    <View >
       <TextInput
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}
         error={showError}
+        style={styles.field}
         {...props}
       />
       {showError && <Text style={styles.errorText}>{meta.error}</Text>}

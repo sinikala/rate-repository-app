@@ -7,7 +7,8 @@ const theme = {
     barText: '#dcdcdc',
     background: '#e1e4e8',
     elementBackground: 'white',
-    buttonText: 'white'
+    buttonText: 'white',
+    error: '#d73a4a'
   },
   fontSizes: {
     body: 14,
