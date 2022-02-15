@@ -16,8 +16,6 @@ class AuthStorage {
     await AsyncStorage.setItem(
       `${this.namespace}:token`, accessToken
     );
-    //const token = await this.getAccessToken();
-    //console.log('tallenettu', token);
   }
 
   removeAccessToken = async () => {

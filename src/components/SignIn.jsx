@@ -67,7 +67,6 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      //const data = 
       await signIn({ username, password });
       navigate("/");
     } catch (e) {

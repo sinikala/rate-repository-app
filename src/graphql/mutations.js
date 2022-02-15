@@ -7,13 +7,3 @@ mutation authenticate($credentials: AuthenticateInput!) {
   }
 }
 `
-
-
-
-// export const SIGNIN = gql`
-// mutation {
-//   authenticate(credentials: { username: "kalle", password: "password" }) {
-//     accessToken
-//   }
-// }
-// `
