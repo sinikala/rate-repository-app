@@ -2,8 +2,11 @@ import Text from './Text';
 import theme from '../theme';
 import FormikTextInput from './FormikTextInput';
 import { StyleSheet, Pressable, View } from 'react-native';
+import { useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import { Formik } from 'formik';
+import useSignIn from '../hooks/useSignIn'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +30,7 @@ const initialValues = {
 
 
 const validationSchema = yup.object().shape({
-  name:
+  username:
     yup
       .string()
       .min(1, 'Username must contain at least 1 character')
@@ -43,7 +46,7 @@ const validationSchema = yup.object().shape({
 const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput name="name" placeholder="Username" />
+      <FormikTextInput name="username" placeholder="Username" />
       <FormikTextInput secureTextEntry={true} name="password" placeholder="Password" />
       <Pressable
         onPress={onSubmit}
@@ -57,9 +60,19 @@ const SignInForm = ({ onSubmit }) => {
 
 
 const SignIn = () => {
+  const [signIn] = useSignIn();
+  let navigate = useNavigate();
 
-  const onSubmit = (values, { resetForm }) => {
-    console.log(values);
+  const onSubmit = async (values, { resetForm }) => {
+    const { username, password } = values;
+
+    try {
+      //const data = 
+      await signIn({ username, password });
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
     resetForm()
   };
 
