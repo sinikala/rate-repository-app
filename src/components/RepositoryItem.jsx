@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
 const RepositoryItemInfo = ({ item }) => {
   return (
-    <View style={styles.infoBox}>
+    <View style={styles.infoBox} testID="repositoryItemInfo">
       <Text fontWeight="bold">{item.fullName}</Text>
       <Text style={{ paddingVertical: 5, flexDirection: 'row', flexWrap: 'wrap' }}>
         {item.description}
@@ -56,7 +56,7 @@ const RepositoryItemInfo = ({ item }) => {
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <View style={styles.infoContainer}>
         <Image
           style={styles.image}

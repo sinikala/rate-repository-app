@@ -33,7 +33,7 @@ const editCount = (count) => {
 const StatsRowBox = ({ count, text }) => {
 
   return (
-    <View style={styles.statBox}>
+    <View style={styles.statBox} testID={text}>
       <Text fontWeight="bold">{editCount(count)}</Text>
       <Text>{text}</Text>
     </View>
@@ -43,7 +43,7 @@ const StatsRowBox = ({ count, text }) => {
 
 const RepositoryStatsRow = ({ item }) => {
   return (
-    <View style={styles.statRow}>
+    <View style={styles.statRow} testID="repositoryItemStats">
       <StatsRowBox count={item.stargazersCount} text="Stars" />
       <StatsRowBox count={item.forksCount} text="Forks" />
       <StatsRowBox count={item.reviewCount} text="Reviews" />
