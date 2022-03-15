@@ -1,4 +1,5 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
+//import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 import RepositoryStatsRow from './RepositoryStatsRow';
@@ -52,22 +53,43 @@ const RepositoryItemInfo = ({ item }) => {
   )
 }
 
+// const RepositoryLink = ({ item }) => {
+//   const onPress = () => {
+//     Linking.openURL(item.url)
+//   }
+
+//   return (
+//     <View >
+//       <Pressable
+//         onPress={onPress}
+//         style={styles.button}
+//       >
+//         <Text color="buttonText">Sign out</Text>
+//       </Pressable>
+//     </View>
+//   )
+
+// }
 
 
 const RepositoryItem = ({ item }) => {
+
   return (
-    <View style={styles.container} testID="repositoryItem">
-      <View style={styles.infoContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: item.ownerAvatarUrl,
-          }}
-        />
-        <RepositoryItemInfo item={item} />
+    <View>
+      <View style={styles.container} testID="repositoryItem">
+        <View style={styles.infoContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: item.ownerAvatarUrl,
+            }}
+          />
+          <RepositoryItemInfo item={item} />
+        </View>
+        <RepositoryStatsRow item={item} />
+
       </View>
-      <RepositoryStatsRow item={item} />
-    </View>
+    </View >
   )
 };
 

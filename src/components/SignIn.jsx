@@ -47,7 +47,6 @@ const SignIn = () => {
   let navigate = useNavigate();
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log('values', values)
     const { username, password } = values;
 
     try {

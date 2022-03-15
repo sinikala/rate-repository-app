@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
 
 import RepositoryList from './RepositoryList';
+import SingleRepoView from './SingleRepoView';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
 import AppBar from './AppBar';
@@ -17,6 +18,8 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
 const Main = () => {
   return (
     <View style={styles.container}>
@@ -24,6 +27,7 @@ const Main = () => {
       <Routes>
         <Route path="/signin" element={<SignIn />} exact />
         <Route path="/signout" element={<SignOut />} exact />
+        <Route path="/repositories/:repositoryId" element={<SingleRepoView />} />
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
