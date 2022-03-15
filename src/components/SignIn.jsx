@@ -4,10 +4,11 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import useSignIn from '../hooks/useSignIn'
 import SignInForm from "./SignInForm";
+import { View } from "react-native";
 
 
 const initialValues = {
-  name: '',
+  username: '',
   password: '',
 };
 
@@ -26,12 +27,27 @@ const validationSchema = yup.object().shape({
       .required('Password is required'),
 });
 
+export const SignInContainer = ({ onSubmit }) => {
+  return (
+    <View>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+      </Formik>
+    </View>
+  )
+};
+
 
 const SignIn = () => {
   const [signIn] = useSignIn();
   let navigate = useNavigate();
 
   const onSubmit = async (values, { resetForm }) => {
+    console.log('values', values)
     const { username, password } = values;
 
     try {
@@ -44,13 +60,7 @@ const SignIn = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
+    <SignInContainer onSubmit={onSubmit} />
   );
 };
 
