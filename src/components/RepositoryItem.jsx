@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image, Pressable } from 'react-native';
-//import * as Linking from 'expo-linking';
+import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 import RepositoryStatsRow from './RepositoryStatsRow';
@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
     flex: 5
   },
+  button: {
+    backgroundColor: theme.colors.primary,
+    borderRadius: 3,
+    margin: 5,
+    alignSelf: 'center',
+    paddingHorizontal: 40
+  }
 });
 
 
@@ -53,23 +60,23 @@ const RepositoryItemInfo = ({ item }) => {
   )
 }
 
-// const RepositoryLink = ({ item }) => {
-//   const onPress = () => {
-//     Linking.openURL(item.url)
-//   }
+const RepositoryLink = ({ item }) => {
+  const onPress = () => {
+    Linking.openURL(item.url)
+  }
 
-//   return (
-//     <View >
-//       <Pressable
-//         onPress={onPress}
-//         style={styles.button}
-//       >
-//         <Text color="buttonText">Sign out</Text>
-//       </Pressable>
-//     </View>
-//   )
+  return (
+    <View >
+      <Pressable
+        onPress={onPress}
+        style={styles.button}
+      >
+        <Text color="buttonText">Open in GitHub</Text>
+      </Pressable>
+    </View>
+  )
 
-// }
+}
 
 
 const RepositoryItem = ({ item }) => {
@@ -87,7 +94,8 @@ const RepositoryItem = ({ item }) => {
           <RepositoryItemInfo item={item} />
         </View>
         <RepositoryStatsRow item={item} />
-
+        {item.url &&
+          <RepositoryLink item={item} />}
       </View>
     </View >
   )
