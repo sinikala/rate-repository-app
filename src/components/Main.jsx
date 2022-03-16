@@ -6,6 +6,7 @@ import RepositoryList from './RepositoryList';
 import SingleRepoView from './SingleRepoView';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
+import NewReview from './NewReview';
 import AppBar from './AppBar';
 import theme from '../theme';
 
@@ -28,6 +29,7 @@ const Main = () => {
         <Route path="/signin" element={<SignIn />} exact />
         <Route path="/signout" element={<SignOut />} exact />
         <Route path="/repositories/:repositoryId" element={<SingleRepoView />} />
+        <Route path="/repositories/newreview" element={<NewReview />} exact />
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
