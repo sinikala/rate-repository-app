@@ -3,8 +3,27 @@ import { GET_REPOSITORIES } from '../graphql/queries';
 
 
 
-const useRepositories = () => {
-  const { data } = useQuery(GET_REPOSITORIES, { fetchPolicy: 'cache-and-network', });
+const useRepositories = (orderBy) => {
+  let variables = {}
+
+  if (orderBy === 'lowest') {
+    variables = {
+      orderBy: 'RATING_AVERAGE',
+      orderDirection: 'ASC'
+    }
+  } else if (orderBy === 'highest') {
+    variables = {
+      orderBy: 'RATING_AVERAGE',
+      orderDirection: 'DESC'
+    }
+  } else {
+    variables = {
+      orderBy: 'CREATED_AT',
+      orderDirection: 'ASC'
+    }
+  }
+  const { data } = useQuery(GET_REPOSITORIES, { variables: variables, fetchPolicy: 'cache-and-network', });
+
   return data;
 };
 

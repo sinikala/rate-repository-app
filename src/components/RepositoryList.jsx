@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { Link } from "react-router-native";
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
+import RepositoryMenu from './RepositoryMenu';
 
 const styles = StyleSheet.create({
   separator: {
@@ -14,7 +16,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, orderBy, setOrderBy }) => {
   const repositoryNodes = repositories
     ? repositories.repositories.edges.map(edge => edge.node)
     : [];
@@ -23,6 +25,7 @@ export const RepositoryListContainer = ({ repositories }) => {
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={() => <RepositoryMenu orderBy={orderBy} setOrderBy={setOrderBy} />}
       renderItem={({ item }) => (
         <Link to={`/repositories/${item.id}`}>
           <RepositoryItem key={item.id} item={item} />
@@ -34,9 +37,10 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 
 export const RepositoryList = () => {
-  const repositories = useRepositories();
+  const [orderBy, setOrderBy] = useState();
+  const repositories = useRepositories(orderBy);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return <RepositoryListContainer repositories={repositories} orderBy={orderBy} setOrderBy={setOrderBy} />;
 };
 
 export default RepositoryList;
