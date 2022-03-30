@@ -28,6 +28,9 @@ const AppBar = () => {
         {userIsLoggedIn &&
           <AppBarTab text="Create a review" link={"/repositories/newreview"} />
         }
+        {userIsLoggedIn &&
+          <AppBarTab text="My reviews" link={"/user/reviews"} />
+        }
         {(userIsLoggedIn)
           ? <AppBarTab text="Sign out" link={"/signout"} />
           : <AppBarTab text="Sign in" link={"/signin"} />

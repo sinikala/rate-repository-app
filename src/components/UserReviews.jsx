@@ -1,10 +1,8 @@
 import { View, FlatList, StyleSheet } from 'react-native';
-import { useParams } from 'react-router-native';
 import { format, parseISO } from 'date-fns';
 import theme from '../theme';
 import Text from './Text';
-import useSingleRepository from '../hooks/useSingleRepository';
-import RepositoryItem from './RepositoryItem';
+import useUserReviews from '../hooks/useUserReviews'
 
 const styles = StyleSheet.create({
   rating: {
@@ -51,6 +49,8 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const ReviewItem = ({ review }) => {
   const date = format(parseISO(review.createdAt), 'dd.MM.yyyy')
+  const fullId = review.id
+  const repositoryId = fullId.substring(fullId.indexOf('.') + 1).replace('.', '/', 1)
 
   return (
     <View style={styles.container}>
@@ -64,7 +64,7 @@ const ReviewItem = ({ review }) => {
       <View style={styles.textContainer}>
         <Text fontWeight="bold"
           fontSize="subheading">
-          {review.user.username}
+          {repositoryId}
         </Text>
         <Text style={{ marginBottom: 3 }}>{date}</Text>
         <Text>
@@ -77,44 +77,33 @@ const ReviewItem = ({ review }) => {
 }
 
 
-const SingleRepoView = () => {
-  let { repositoryId } = useParams();
+const UserReviews = () => {
+  const data = useUserReviews(true)
 
-  const { repository, fetchMore } = useSingleRepository({
-    id: repositoryId
-  });
-
-
-  while (!repository) {
+  while (!data) {
     return (
       <View />
     )
   }
-  //const repository = result.repository
 
-  const reviews = repository
-    ? repository.reviews.edges.map(edge => edge.node)
+  const reviews = data.me.reviews
+    ? data.me.reviews.edges.map(edge => edge.node)
     : [];
 
-  const onEndReach = () => {
-    fetchMore();
-  };
 
   return (
     <View style={styles.page}>
-      {repository &&
+      {reviews &&
         <FlatList
           data={reviews}
           renderItem={({ item }) => <ReviewItem review={item} />}
           keyExtractor={({ id }) => id}
           ItemSeparatorComponent={ItemSeparator}
-          ListHeaderComponent={() => <RepositoryItem item={repository} />}
-          onEndReached={onEndReach}
-          onEndReachedThreshold={0.5}
+
         />
       }
     </View>
   )
 }
 
-export default SingleRepoView;
+export default UserReviews;
