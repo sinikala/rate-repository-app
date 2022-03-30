@@ -21,7 +21,7 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_SINGLE_REPOSITORY = gql`
-  query repository($id: ID!) {
+  query repository($id: ID!, $after: String) {
     repository (id: $id) {
       id
       fullName
@@ -33,7 +33,7 @@ export const GET_SINGLE_REPOSITORY = gql`
       stargazersCount
       ownerAvatarUrl
       url
-      reviews {
+      reviews (first: 10, after: $after){
         edges {
           node {
             id
@@ -45,6 +45,11 @@ export const GET_SINGLE_REPOSITORY = gql`
               username
             }
           }
+        }
+        pageInfo {
+          hasNextPage
+          startCursor
+          endCursor
         }
       }
     }

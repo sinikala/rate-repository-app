@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const ReviewItem = ({ review }) => {
 
+const ReviewItem = ({ review }) => {
   const date = format(parseISO(review.createdAt), 'dd.MM.yyyy')
 
   return (
@@ -80,18 +80,26 @@ const ReviewItem = ({ review }) => {
 const SingleRepoView = () => {
   let { repositoryId } = useParams();
 
-  const result = useSingleRepository(repositoryId);
+  const { repository, fetchMore } = useSingleRepository({
+    id: repositoryId
+  });
 
-  while (!result) {
+
+  while (!repository) {
     return (
       <View />
     )
   }
-  const repository = result.repository
+  //const repository = result.repository
 
   const reviews = repository
     ? repository.reviews.edges.map(edge => edge.node)
     : [];
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list');
+    fetchMore();
+  };
 
   return (
     <View style={styles.page}>
@@ -102,6 +110,8 @@ const SingleRepoView = () => {
           keyExtractor={({ id }) => id}
           ItemSeparatorComponent={ItemSeparator}
           ListHeaderComponent={() => <RepositoryItem item={repository} />}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
       }
     </View>
